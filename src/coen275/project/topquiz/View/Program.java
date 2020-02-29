@@ -1,4 +1,4 @@
-package coen275.project.topquiz;
+package coen275.project.topquiz.View;
 
 import java.awt.EventQueue;
 import javax.swing.*;
@@ -45,6 +45,7 @@ public class Program {
 		
 		JLabel lblTopQuiz = new JLabel("TopQuiz");
 		frame.getContentPane().add(lblTopQuiz, BorderLayout.CENTER);
+		
 	}
 
 }
