@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Users>
+	<User>
+		<Name></Name>
+		<IsAdmin></IsAdmin>
+		<QuizList>
+			<Quiz>
+				<Name></Name>
+				<Your_Score>
+					<Attempt></Attempt>
+				</Your_Score>
+			</Quiz>
+		</QuizList>
+	</User>
+</Users>
