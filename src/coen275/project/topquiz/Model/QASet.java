@@ -1,5 +1,4 @@
 package coen275.project.topquiz.Model;
-import java.util.ArrayList;
 
 
 public class QASet {
@@ -11,9 +10,9 @@ public class QASet {
 	private String answerChoice4;
 	private String correctAnswer;
 	private Integer points; 
+	private String questionType;
 	
 	// Not stored in database
-	private String questionType;
 	private String userAnswer;
 	private Integer your_points;
 	private Utility.QuestionStatus questionStatus;
@@ -35,13 +34,32 @@ public class QASet {
 	/**
 	 * @return the your_points
 	 */
-	public int getYour_points() {
+	public Integer getYour_points() {
+		return your_points;
+	}
+	
+	public void setYour_points() {
 		if (this.userAnswer.equals(this.correctAnswer)) {
 			this.your_points = getPoints();
 		} else {
 			this.your_points = 0;
 		}
-		return your_points;
+	}
+	
+	/**
+	 * @return the questionStatus
+	 */
+	public Utility.QuestionStatus getQuestionStatus() {				
+		return questionStatus;
+	}
+	
+	public void setQuestionStatus() {
+		if (getUserAnswer() == "")
+			this.questionStatus = Utility.QuestionStatus.NOT_ATTEMPTED;
+		if (!getUserAnswer().equals(getCorrectAnswer()))
+			this.questionStatus = Utility.QuestionStatus.WRONG;
+		if (getUserAnswer().equals(getCorrectAnswer()))
+			this.questionStatus = Utility.QuestionStatus.CORRECT;
 	}
 
 	/**
@@ -180,18 +198,5 @@ public class QASet {
 	 */
 	public void setQuestionType(String questionType) {
 		this.questionType = questionType;
-	}
-
-	/**
-	 * @return the questionStatus
-	 */
-	public Utility.QuestionStatus getQuestionStatus() {		
-		if (getUserAnswer() == "")
-			this.questionStatus = Utility.QuestionStatus.NOT_ATTEMPTED;
-		if (!getUserAnswer().equals(getCorrectAnswer()))
-			this.questionStatus = Utility.QuestionStatus.WRONG;
-		if (getUserAnswer().equals(getCorrectAnswer()))
-			this.questionStatus = Utility.QuestionStatus.CORRECT;
-		return questionStatus;
 	}
 }

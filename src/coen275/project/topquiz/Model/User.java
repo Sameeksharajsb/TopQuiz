@@ -1,5 +1,4 @@
 package coen275.project.topquiz.Model;
-import java.util.*;
 
 public class User {
 	
