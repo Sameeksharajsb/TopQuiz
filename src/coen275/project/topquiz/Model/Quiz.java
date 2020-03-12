@@ -1,15 +1,10 @@
 package coen275.project.topquiz.Model;
 
-public abstract class Quiz {
+public class Quiz {
 	private String name;
     private int time_limit;
     private int score;
-    private int attempts_allowed=3;
     private QuestionBank questionBank;
-    
-    public Quiz()
-    {
-    }
     
 	 /** 
 	    * Setter method for Dollar. 
@@ -44,15 +39,6 @@ public abstract class Quiz {
 	public void setScore(int score) {
 		this.score = score;
 	}
-
-	public int getAttempts_allowed() {
-		return attempts_allowed;
-	}
-
-	public void setAttempts_allowed(int attempts_allowed) {
-		this.attempts_allowed = attempts_allowed;
-	}
-
 	
 	/**
 	 * @return the questionBank
@@ -67,5 +53,4 @@ public abstract class Quiz {
 	public void setQuestionBank(QuestionBank questionBank) {
 		this.questionBank = questionBank;
 	}
-	
 }

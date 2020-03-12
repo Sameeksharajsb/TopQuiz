@@ -3,20 +3,11 @@ import java.util.ArrayList;
 
 
 public class QuestionBank {
-		
 		private String name;
 		
 		private String difficultyLevel;
 		
-		private String quizCategory;
-		
-		private ArrayList<QASet> questionsets = null;
-		
-		public ArrayList<QASet> getQuestions(){
-			return questionsets;
-		}
-		
-		public QuestionBank() {}
+		private ArrayList<QASet> questionAnswerSets;		
 
 		/**
 		 * @return the name
@@ -45,25 +36,25 @@ public class QuestionBank {
 		public void setDifficultyLevel(String difficultyLevel) {
 			this.difficultyLevel = difficultyLevel;
 		}
-
-		/**
-		 * @return the quizCategory
-		 */
-		public String getQuizCategory() {
-			return quizCategory;
-		}
-
-		/**
-		 * @param quizCategory the quizCategory to set
-		 */
-		public void setQuizCategory(String quizCategory) {
-			this.quizCategory = quizCategory;
-		}
 		
 		/**
 		 * @return the numberOfQuestions
 		 */
 		public int getTotalNumberOfQuestions() {
-			return questionsets.size();
+			return getQuestionAnswerSets().size();
+		}
+
+		/**
+		 * @return the questionAnswerSets
+		 */
+		public ArrayList<QASet> getQuestionAnswerSets() {
+			return questionAnswerSets;
+		}
+
+		/**
+		 * @param questionAnswerSets the questionAnswerSets to set
+		 */
+		public void setQuestionAnswerSets(ArrayList<QASet> questionAnswerSets) {
+			this.questionAnswerSets = questionAnswerSets;
 		}
 	}

@@ -43,7 +43,7 @@ public class TopQuizInterface {
 
 	Portal portal;
 	User user;
-	Quiz selectedQuiz;
+	Quiz quiz;
 	JPanel topPanel;
 	JPanel bannerPanel;
 	JLabel lblHeader;
@@ -51,10 +51,11 @@ public class TopQuizInterface {
 	JPanel middlePanel;
 	JPanel checkboxPanel;
 	JLabel lblQuestion;
-	JCheckBox chk_option1;
-	JCheckBox chk_option2;
-	JCheckBox chk_option3;
-	JCheckBox chk_option4;
+	ButtonGroup radioButtonGroup;
+	JRadioButton chk_option1;
+	JRadioButton chk_option2;
+	JRadioButton chk_option3;
+	JRadioButton chk_option4;
 	JPanel loginPanel;
 	JLabel lblUserName;
 	JLabel lblQuestionNumber;
@@ -82,6 +83,7 @@ public class TopQuizInterface {
 	JButton btnNext;
 	JButton btnBack;
 	JButton btnLogin;
+	JButton btnStart;
 
 	/**
 	 * Initialize the contents of the frame.
@@ -93,12 +95,12 @@ public class TopQuizInterface {
 		frame.getContentPane().setLayout(null);
 		 try
 		 {
-			 CreateContainer();
-				CreateLoginInterface();
-				CreateQuizSelectionInterface();
-				CreateQuizModificationInterface();
-				CreateMcqCheckboxInterface();
-				ShowHideControlsOnLoad();
+			CreateContainer();
+			CreateLoginInterface();
+			CreateQuizSelectionInterface();
+			CreateQuizModificationInterface();
+			CreateMcqCheckboxInterface();
+			ShowHideControlsOnLoad();
 		 }
 		 catch(Exception ex)
 		 {
@@ -127,27 +129,39 @@ public class TopQuizInterface {
 		lblQuestion.setHorizontalAlignment(SwingConstants.CENTER);
 		lblQuestion.setBounds(67, 98, 567, 43);
 		checkboxPanel.add(lblQuestion);
-
-		chk_option1 = new JCheckBox("Option1");
+         
+		radioButtonGroup = new ButtonGroup();
+		chk_option1 = new JRadioButton("Option1");
+		chk_option1.setActionCommand(chk_option1.getText());
 		chk_option1.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		chk_option1.setBounds(228, 169, 137, 23);
 
-		chk_option2 = new JCheckBox("Option2");
+		chk_option2 = new JRadioButton("Option2");
+		chk_option2.setActionCommand(chk_option2.getText());
 		chk_option2.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		chk_option2.setBounds(228, 200, 97, 23);
 
-		chk_option3 = new JCheckBox("Option3");
+		chk_option3 = new JRadioButton("Option3");
+		chk_option3.setActionCommand(chk_option3.getText());
 		chk_option3.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		chk_option3.setBounds(228, 232, 97, 23);
 
-		chk_option4 = new JCheckBox("Option4");
+		chk_option4 = new JRadioButton("Option4");
+		chk_option4.setActionCommand(chk_option4.getText());
 		chk_option4.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		chk_option4.setBounds(228, 264, 97, 23);
 
+		chk_option1.setSelected(true);
+		radioButtonGroup.add(chk_option1);
+		radioButtonGroup.add(chk_option2);
+		radioButtonGroup.add(chk_option3);
+		radioButtonGroup.add(chk_option4);
+				
 		checkboxPanel.add(chk_option1);
 		checkboxPanel.add(chk_option2);
 		checkboxPanel.add(chk_option3);
 		checkboxPanel.add(chk_option4);
+		JOptionPane.showMessageDialog(frame,radioButtonGroup.getSelection().getActionCommand());
 	}
 
 	private void CreateQuizModificationInterface() {
@@ -222,7 +236,12 @@ public class TopQuizInterface {
 		savePanel.add(txtTotalScore);
 
 		cbQuestionBank = new JComboBox<String>();
-
+		ArrayList<QuestionBank> all_questionBank = portal.getAllQuestio();
+		for (Quiz quiz : all_quizzess) {
+			cbSelectQuiz.addItem(quiz.getName());
+		}
+		
+		
 		cbQuestionBank.addItem("test1");
 		cbQuestionBank.addItem("test2");
 		cbQuestionBank.addItem("test3");
@@ -280,8 +299,6 @@ public class TopQuizInterface {
 		btnEdit.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		btnEdit.setBounds(91, 275, 308, 47);
 		selectPanel.add(btnEdit);
-		
-		
 
 		btnViewResults = new JButton("VIEW RESULTS");
 		btnViewResults.setFont(new Font("Times New Roman", Font.BOLD, 20));
@@ -294,6 +311,7 @@ public class TopQuizInterface {
 		{
 			btnEdit.setVisible(false);
 			btnCreate.setVisible(false);
+			btnStart.setVisible(true);
 		}
 	}
 
@@ -319,9 +337,20 @@ public class TopQuizInterface {
 	}
 
 	private void AddBottomPanelControls() {
+		btnStart = new JButton("START");
+		btnStart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				startQuiz();
+			}
+		});
+		btnStart.setFont(new Font("Times New Roman", Font.BOLD, 40));
+		btnStart.setBounds(1052, 11, 184, 55);
+		bottomPanel.add(btnStart);
+		
 		btnNext = new JButton("NEXT");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				JOptionPane.showMessageDialog(frame, radioButtonGroup.getSelection().getActionCommand());
 			}
 		});
 		btnNext.setFont(new Font("Times New Roman", Font.BOLD, 40));
@@ -335,19 +364,27 @@ public class TopQuizInterface {
 
 		btnLogin = new JButton("LOGIN");
 		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if (txtUserName.getText().equals("")) {
-					JOptionPane.showMessageDialog(frame, "Please enter user name");
-					return;
-				}
-
-				user = portal.GetUser(txtUserName.toString(), false);
+			public void actionPerformed(ActionEvent arg0) {	
+				getUser();
 				ShowSelectWindow();
-			}
+			}			
 		});
 		btnLogin.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		btnLogin.setBounds(523, 11, 176, 55);
 		bottomPanel.add(btnLogin);
+	}
+	
+	private void startQuiz() {
+		getQuiz();
+		btnStart.setVisible(false);
+		btnLogin.setVisible(false);
+		lblQuestionNumber.setVisible(false);
+		btnNext.setVisible(true);
+		btnBack.setVisible(false);
+		loginPanel.setVisible(false);
+		checkboxPanel.setVisible(true);
+		selectPanel.setVisible(false);
+		savePanel.setVisible(false);
 	}
 
 	private void AddMiddlePanelControls() {
@@ -402,6 +439,7 @@ public class TopQuizInterface {
 	}
 
 	private void ShowSaveWindow() {
+		btnStart.setVisible(false);
 		btnLogin.setVisible(false);
 		lblQuestionNumber.setVisible(false);
 		btnNext.setVisible(false);
@@ -412,7 +450,25 @@ public class TopQuizInterface {
 		savePanel.setVisible(true);
 	}
 
+	private void getUser() {
+		if (txtUserName.getText().equals("")) {
+			JOptionPane.showMessageDialog(frame, "Please enter user name");
+			return;
+		}
+		this.user = portal.GetUser(txtUserName.getText().toString());
+	}
+	
+	private void getQuiz() {
+		if (cbSelectQuiz.getSelectedItem().toString().equals("")) {
+			JOptionPane.showMessageDialog(frame, "Please enter user name");
+			return;
+		}
+		
+		this.quiz = portal.GetUserQuiz(cbSelectQuiz.getSelectedItem().toString(), cbDifficultyLevel.getSelectedItem().toString());
+	}
+	
 	private void ShowSelectWindow() {
+		btnStart.setVisible(false);
 		btnLogin.setVisible(false);
 		lblQuestionNumber.setVisible(false);
 		btnNext.setVisible(false);
@@ -424,6 +480,7 @@ public class TopQuizInterface {
 	}
 
 	private void ShowHideControlsOnLoad() {
+		btnStart.setVisible(false);
 		btnLogin.setVisible(true);
 		lblQuestionNumber.setVisible(false);
 		btnNext.setVisible(false);
