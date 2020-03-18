@@ -10,12 +10,13 @@ public class QASet {
 	private String answerChoice4;
 	private String correctAnswer;
 	private Integer points; 
-	private String questionType;
+	private Utility.QuestionType questionType;
+	private String imagePath;
 	
 	// Not stored in database
-	private String userAnswer;
-	private Integer your_points;
-	private Utility.QuestionStatus questionStatus;
+	private String userAnswer = "";
+	private Integer your_points = 0;
+	private Utility.QuestionStatus questionStatus = Utility.QuestionStatus.NOT_ATTEMPTED;
 	
 	/**
 	 * @return the userAnswer
@@ -187,7 +188,7 @@ public class QASet {
 	/**
 	 * @return the questionType
 	 */
-	public String getQuestionType() {
+	public Utility.QuestionType getQuestionType() {
 		return questionType;
 	}
 
@@ -197,6 +198,13 @@ public class QASet {
 	 * @return a string which gives the type of this question
 	 */
 	public void setQuestionType(String questionType) {
-		this.questionType = questionType;
+		this.questionType = Utility.QuestionType.valueOf(questionType);
+	}
+	
+	public String getImagePath() {
+		return imagePath;
+	}
+	public void setImagePath(String imagePath) {
+		this.imagePath=imagePath;
 	}
 }

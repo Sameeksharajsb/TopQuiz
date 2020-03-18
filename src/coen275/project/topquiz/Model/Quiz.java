@@ -24,19 +24,19 @@ public class Quiz {
 		return name;
 	}
 	
-	public int getTime_limit() {
+	public Integer getTime_limit() {
 		return time_limit;
 	}
 
-	public void setTime_limit(int time_limit) {
+	public void setTime_limit(Integer time_limit) {
 		this.time_limit = time_limit;
 	}
 
-	public int getScore() {
+	public Integer getScore() {
 		return score;
 	}
 
-	public void setScore(int score) {
+	public void setScore(Integer score) {
 		this.score = score;
 	}
 	

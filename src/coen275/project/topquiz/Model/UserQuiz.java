@@ -1,25 +1,12 @@
 package coen275.project.topquiz.Model;
 
 public class UserQuiz {
-	private Quiz myQuiz;
-	private Integer correctCount;
-	private Integer wrongCount;
-	private Integer notAnsweredCount;
-	private Integer your_Totalscore;
-	
-	/**
-	 * @return the myQuiz
-	 */
-	public Quiz getMyQuiz() {
-		return myQuiz;
-	}
-
-	/**
-	 * @param myQuiz the myQuiz to set
-	 */
-	public void setMyQuiz(Quiz myQuiz) {
-		this.myQuiz = myQuiz;
-	}
+	private String quizName;
+	private Integer correctCount = 0;
+	private Integer wrongCount = 0;
+	private Integer notAnsweredCount = 0;
+	private Integer your_Totalscore = 0;
+	private String difficultyLevel = "";
 	
 	public Integer getYour_Totalscore() {		
 		return your_Totalscore;
@@ -64,28 +51,47 @@ public class UserQuiz {
 	}
 	
 	// access on every next button click
-	public void CheckAnswer()
-	{
-		for (QASet question : getMyQuiz().getQuestionBank().getQuestionAnswerSets())
+	public void CheckAnswer(QASet set)
+	{		
+		if(set.getQuestionStatus().equals(Utility.QuestionStatus.CORRECT))
 		{
-			if(question.getQuestionStatus().equals(Utility.QuestionStatus.CORRECT))
-			{
-				this.correctCount++;
-			}
-			if(question.getQuestionStatus().equals(Utility.QuestionStatus.WRONG))
-			{
-				this.wrongCount++;
-			}
-			if(question.getQuestionStatus().equals(Utility.QuestionStatus.NOT_ATTEMPTED))
-			{
-				this.notAnsweredCount++;
-			}
+			this.correctCount++;
+		}
+		if(set.getQuestionStatus().equals(Utility.QuestionStatus.WRONG))
+		{
+			this.wrongCount++;
+		}
+		if(set.getQuestionStatus().equals(Utility.QuestionStatus.NOT_ATTEMPTED))
+		{
+			this.notAnsweredCount++;
 		}
 	}
 	
-	// access on submit button click
-	public void CalculateTotalScore() {
-		for (QASet point : getMyQuiz().getQuestionBank().getQuestionAnswerSets())
-			this.your_Totalscore += point.getYour_points();
+	/**
+	 * @return the quizName
+	 */
+	public String getQuizName() {
+		return quizName;
+	}
+
+	/**
+	 * @param quizName the quizName to set
+	 */
+	public void setQuizName(String quizName) {
+		this.quizName = quizName;
+	}
+
+	/**
+	 * @return the difficultyLevel
+	 */
+	public String getDifficultyLevel() {
+		return difficultyLevel;
+	}
+
+	/**
+	 * @param difficultyLevel the difficultyLevel to set
+	 */
+	public void setDifficultyLevel(String difficultyLevel) {
+		this.difficultyLevel = difficultyLevel;
 	}
 }

@@ -3,5 +3,16 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="C:/Program Files (x86)/MySQL/Connector J 8.0/mysql-connector-java-8.0.19.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nitya/eclipse/JFreechart/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nitya/eclipse/JFreechart/jcommon-1.0.23.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nitya/eclipse/JFreechart/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nitya/eclipse/JFreechart/jfreechart-1.0.19-experimental.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nitya/eclipse/JFreechart/jfreechart-1.0.19-swt.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nitya/eclipse/JFreechart/jfreesvg-2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nitya/eclipse/JFreechart/junit-4.11.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nitya/eclipse/JFreechart/orsoncharts-1.4-eval-nofx.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nitya/eclipse/JFreechart/orsonpdf-1.6-eval.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nitya/eclipse/JFreechart/servlet.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nitya/eclipse/JFreechart/swtgraphics2d.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,13 +1,12 @@
 package coen275.project.topquiz.Controller;
 import coen275.project.topquiz.Model.*;
-
-import java.security.Timestamp;
 import java.util.*;
 
 public class Portal {
 	private QuizDao quizDao;
 	private UserDao userDao;
 	private UserQuizDao userQuizDao;
+	
 	
 	public Portal()
 	{
@@ -28,49 +27,57 @@ public class Portal {
 		if(findObj == null)
 		{
 			return userDao.addUser(new User(userName, false));
-		}
-		
+		}		
 		return findObj;
 	}
 	
 	
 	public ArrayList<String> GetAllQuizNames()
 	{
-		return quizDao.getAllQuizNames();
+		return quizDao.getAllQuizNames	();
 	}
 	
-    public Quiz FindQuiz(String quizName, String difficultyLevel)
+    public Quiz GetQuiz(String quizName, String difficultyLevel)
     {
-    	return quizDao.findQuiz(quizName, difficultyLevel);
+    	return quizDao.getQuiz(quizName, difficultyLevel);
     }
 	
-    public Quiz UpdateQuiz(String quizName, String difficultyLevel, java.sql.Time time)
+    public boolean UpdateQuiz(String quizName, String difficultyLevel, Integer time)
     {
     	return quizDao.updateQuiz(quizName, difficultyLevel, time);
     }
     
     public ArrayList<String> GetAllQuestionBankNames(String quizName, String difficultyLevel)
 	{
-		return quizDao.getAllQuestionBankNames(quizName, difficultyLevel);
+		return quizDao.GetAllQuestionBankNames(quizName, difficultyLevel);
 	}
     
     public ArrayList<String> GetAllUserQuizNames(String userName)
     {
-    	return userQuizDao.getAllUserQuizNames(userName);
+    	return userQuizDao.GetAllUserQuizNames(userName);
     }
     
-    public UserQuiz GetUserQuiz(String userName, String quizName)
+    public ArrayList<String> GetAllUserQuizDifficultyLevels(String userName, String quizName)
     {
-    	return userQuizDao.getUserQuiz(userName, quizName);
+    	return userQuizDao.getAllUserQuizDifficultyLevels(userName, quizName);
     }
     
-    public UserQuiz RegisterUserToQuiz(String userName, String quizName)
+    public UserQuiz GetUserQuiz(String userName, String quizName, String difficultyLevel)
     {
-    	return userQuizDao.registerUserToQuiz(userName, quizName);
+    	UserQuiz findObj = userQuizDao.GetUserQuiz(userName, quizName, difficultyLevel);
+		// New user
+		if(findObj == null)
+		{
+			UserQuiz userQuiz = new UserQuiz();
+			userQuiz.setQuizName(quizName);
+			userQuiz.setDifficultyLevel(difficultyLevel);
+			return userQuizDao.RegisterUserToQuiz(userQuiz, userName);
+		}		
+		return findObj;
     }
     
-    public UserQuiz UpdateUserQuiz(String userName, String quizName)
+    public boolean UpdateUserQuiz(String userName, String quizName, UserQuiz userquiz)
     {
-    	return userQuizDao.updateUserQuiz(userName, quizName);
+    	return userQuizDao.UpdateUserQuiz(userName, quizName, userquiz);
     }	
 }
